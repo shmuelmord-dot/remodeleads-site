@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RemodeLeads — Pre-Booked Kitchen &amp; Bath Appointments for California Contractors</title>
+<meta name="description" content="We run the ad campaigns and our in-house call center qualifies every homeowner, then books the consultation straight onto your calendar. $250 per appointment. No retainer, no setup fee, no ad spend, no contract.">
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+<noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
+<link rel="stylesheet" href="assets/css/styles.css?v=7">
+</head>
+<body>
+
+<!-- ============================ TOP BAR ============================ -->
+<div class="topbar">
+  <div class="container topbar__inner">
+    <span class="topbar__item"><span class="dot dot--pulse"></span> Now booking consultations across <strong>6 Southern California counties</strong></span>
+    <span class="topbar__item">Talk to us: <a href="tel:+13238008381">(323) 800-8381</a></span>
+  </div>
+</div>
+
+<!-- ============================ HEADER ============================= -->
+<header class="site-header">
+  <div class="container">
+    <nav class="nav" aria-label="Main">
+      <a class="nav__logo" href="index.html" aria-label="RemodeLeads home">
+        <img src="assets/img/logo.png" alt="RemodeLeads">
+      </a>
+      <ul class="nav__links">
+        <li><a href="how-it-works.html">How It Works</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="who-its-for.html">Who It's For</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+      <span class="nav__spacer"></span>
+      <div class="nav__actions">
+        <a class="nav__phone" href="tel:+13238008381">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span>(323) 800-8381</span>
+        </a>
+        <a class="btn btn--primary btn--sm" href="https://app.remodeleads.com/join">Get Appointments</a>
+        <button class="nav__toggle" aria-label="Open menu" aria-expanded="false"><span></span></button>
+      </div>
+    </nav>
+  </div>
+  <div class="mobile-menu">
+    <div class="container">
+      <ul>
+        <li><a href="how-it-works.html">How It Works</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="who-its-for.html">Who It's For</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+      <a class="btn btn--primary btn--block" href="https://app.remodeleads.com/join">Start Getting Appointments</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ============================== HERO ============================= -->
+<!-- Full-bleed photo slideshow. Slides + captions are defined in the SLIDES
+     array in site.js; the first one is inlined here so it paints immediately. -->
+<section class="hero">
+  <div class="hero__bg" id="hero-bg" aria-hidden="true">
+    <div class="hero__slide is-active" style="background-image:url('assets/img/hero/hero-1.jpg')"></div>
+  </div>
+  <div class="hero__scrim" aria-hidden="true"></div>
+
+  <div class="container">
+    <div class="hero__inner">
+      <span class="badge badge--light">Kitchen &amp; Bath · Southern California</span>
+      <h1 class="mt-0" style="margin-top:18px">Pre-booked remodeling appointments. <em>Zero chasing.</em></h1>
+      <p class="hero__sub">
+        We build and run the ad campaigns. Our in-house call center speaks to every homeowner,
+        verifies they own the property and are ready to start — then books the consultation
+        straight onto your calendar. You show up and sell.
+      </p>
+
+      <!-- Territory checker, styled as a search bar sitting on the photo -->
+      <form id="territory-form" class="hero-search" novalidate>
+        <div class="hero-search__field">
+          <label class="hero-search__label" for="territory-service">What you build</label>
+          <select id="territory-service" aria-label="Service type">
+            <option value="">Select a service…</option>
+            <option>Full Kitchen Remodel</option>
+            <option>Full Bathroom Remodel</option>
+            <option>Kitchen &amp; Bath Combo</option>
+            <option>Whole-Home Renovation</option>
+          </select>
+        </div>
+        <div class="hero-search__field">
+          <label class="hero-search__label" for="territory-county">Your county</label>
+          <select id="territory-county" aria-label="County">
+            <option value="">Select a county…</option>
+            <!-- Counties injected from CONFIG in site.js -->
+          </select>
+        </div>
+        <button class="btn btn--primary hero-search__btn" type="submit">Check availability</button>
+      </form>
+
+      <div class="hero__result" id="territory-result" role="status" aria-live="polite"></div>
+      <div class="btn-row mt-3" id="territory-actions" style="display:none">
+        <a class="btn btn--primary" id="territory-cta" href="https://app.remodeleads.com/join">Start Getting Appointments →</a>
+        <a class="btn btn--white" href="https://wa.me/972557127466?text=Hi%2C%20I%20came%20from%20your%20website%20and%20I%27d%20love%20to%20ask%20a%20few%20questions." target="_blank" rel="noopener">Ask a question first</a>
+      </div>
+
+      <div class="hero__proof">
+        <span class="hero__proof-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          $250 per appointment
+        </span>
+        <span class="hero__proof-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          No retainer · No contract
+        </span>
+        <span class="hero__proof-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Your time slot is exclusive
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero__caption" id="hero-caption" aria-hidden="true">
+    <div class="hero__caption-title">Whole-Home Renovation</div>
+    <div class="hero__caption-sub">The kind of project we book</div>
+  </div>
+
+  <div class="hero__dots" id="hero-dots" role="tablist" aria-label="Featured project"></div>
+</section>
+
+<!-- ========================= CLIENT LOGO BAND ====================== -->
+<!-- Renders only once real logos load from assets/img/clients/ — see the
+     CLIENT_NAMES block in site.js and the README in that folder. -->
+<section class="section section--tight logo-band" id="logo-band">
+  <div class="container">
+    <p class="text-center small muted" style="letter-spacing:.1em;text-transform:uppercase;font-weight:700;margin-bottom:22px">
+      Some of the companies we work with
+    </p>
+    <div class="marquee">
+      <div class="marquee__track"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= STATS ============================= -->
+<section class="section section--tight">
+  <div class="container">
+    <div class="stats reveal">
+      <div class="stat">
+        <div class="stat__num">$<span data-count="250">250</span></div>
+        <div class="stat__label">Per appointment, Basic plan</div>
+      </div>
+      <div class="stat">
+        <div class="stat__num">$<span data-count="0">0</span></div>
+        <div class="stat__label">Ad spend — we fund the campaigns</div>
+      </div>
+      <div class="stat">
+        <div class="stat__num"><span data-count="6">6</span></div>
+        <div class="stat__label">Southern California counties covered</div>
+      </div>
+      <div class="stat">
+        <div class="stat__num"><span data-count="0">0</span></div>
+        <div class="stat__label">Retainers, setup fees or contracts</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================== LEADS VS APPOINTMENTS (TABS) ================= -->
+<section class="section section--soft">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">The difference</span>
+      <h2>Stop buying "leads" you have to chase.<br>Start receiving appointments.</h2>
+      <p>A lead is a phone number and a hope. An appointment is a homeowner who already said yes to a specific day and time.</p>
+    </div>
+
+    <div data-tabs class="reveal">
+      <div class="text-center">
+        <div class="tabs" role="tablist" aria-label="Compare approaches">
+          <button data-tab="old" class="is-active" role="tab" aria-selected="true">Buying leads</button>
+          <button data-tab="new" role="tab" aria-selected="false">RemodeLeads appointments</button>
+        </div>
+      </div>
+
+      <!-- OLD WAY -->
+      <div data-panel="old" class="tab-panel is-active">
+        <div class="steps">
+          <div class="step">
+            <div class="step__num">1</div>
+            <div>
+              <span class="step__tag step__tag--us" style="background:var(--red-050);color:var(--red-500)">On you</span>
+              <h4>A homeowner fills out a form somewhere</h4>
+              <p>You get a raw name and number. No idea if they own the home, what the budget is, or whether they're even serious.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step__num">2</div>
+            <div>
+              <span class="step__tag step__tag--us" style="background:var(--red-050);color:var(--red-500)">On you</span>
+              <h4>The same lead was sold to four other contractors</h4>
+              <p>Now it's a race. Whoever calls in the first ninety seconds wins — and you were on a job site.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step__num">3</div>
+            <div>
+              <span class="step__tag step__tag--us" style="background:var(--red-050);color:var(--red-500)">On you</span>
+              <h4>You call. Voicemail. You call again. Voicemail.</h4>
+              <p>Five to ten follow-ups over several days, squeezed between actual work.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step__num">4</div>
+            <div>
+              <span class="step__tag step__tag--us" style="background:var(--red-050);color:var(--red-500)">On you</span>
+              <h4>You finally reach them — and they're a renter</h4>
+              <p>Or the "kitchen remodel" is a faucet swap. You just spent a week qualifying your way to nothing.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step__num">5</div>
+            <div>
+              <span class="step__tag step__tag--us" style="background:var(--red-050);color:var(--red-500)">On you</span>
+              <h4>Scheduling ping-pong, then a no-show</h4>
+              <p>You drove forty minutes. Nobody's home. And you paid for that lead either way.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- NEW WAY -->
+      <div data-panel="new" class="tab-panel">
+        <div class="steps">
+          <div class="step step--them">
+            <div class="step__num">1</div>
+            <div>
+              <span class="step__tag step__tag--us">We handle it</span>
+              <h4>We run the campaigns</h4>
+              <p>Targeted kitchen &amp; bath advertising built, launched and optimized by us — and funded by us. You never touch an ad account or put money into one.</p>
+            </div>
+          </div>
+          <div class="step step--them">
+            <div class="step__num">2</div>
+            <div>
+              <span class="step__tag step__tag--us">We handle it</span>
+              <h4>Our call center actually talks to them</h4>
+              <p>Real people, not a chatbot. We confirm they own the property, the project scope is real, and the timeline is 30–90 days.</p>
+            </div>
+          </div>
+          <div class="step step--them">
+            <div class="step__num">3</div>
+            <div>
+              <span class="step__tag step__tag--us">We handle it</span>
+              <h4>We lock an exact date and time</h4>
+              <p>Against your real availability and your travel radius — not a "sometime next week" maybe.</p>
+            </div>
+          </div>
+          <div class="step step--them">
+            <div class="step__num">4</div>
+            <div>
+              <span class="step__tag step__tag--us">We handle it</span>
+              <h4>It lands in your app</h4>
+              <p>Name, phone, exact address, scope notes and the confirmed time — pushed to your RemodeLeads contractor app.</p>
+            </div>
+          </div>
+          <div class="step step--you">
+            <div class="step__num">5</div>
+            <div>
+              <span class="step__tag step__tag--you">Your job</span>
+              <h4>You show up and close</h4>
+              <p>One thing on your plate: walk in, measure, present, sign. That's the entire ask.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="table-wrap mt-4 reveal">
+      <table class="compare">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Marketing agency</th>
+            <th scope="col">Shared lead platforms</th>
+            <th scope="col" class="col-ours">RemodeLeads</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">What you pay</th>
+            <td>$3k–$5k/month retainer, win or lose</td>
+            <td>Per lead, whether or not it's real</td>
+            <td class="col-ours">Per booked appointment only</td>
+          </tr>
+          <tr>
+            <th scope="row">Who chases the homeowner</th>
+            <td>Nobody — they hand you a form fill</td>
+            <td>You, against four other contractors</td>
+            <td class="col-ours">Our in-house call center</td>
+          </tr>
+          <tr>
+            <th scope="row">Exclusivity</th>
+            <td>Varies</td>
+            <td>Sold to 4–6 contractors at once</td>
+            <td class="col-ours">The time slot is yours alone</td>
+          </tr>
+          <tr>
+            <th scope="row">Qualification</th>
+            <td>None</td>
+            <td>A checkbox on a form</td>
+            <td class="col-ours">Human verification on every one</td>
+          </tr>
+          <tr>
+            <th scope="row">Commitment</th>
+            <td>6–12 month contracts</td>
+            <td>Prepaid credit packs</td>
+            <td class="col-ours">Pause or stop whenever</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= QUALIFICATION ========================= -->
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Vetting</span>
+      <h2>Every consultation is vetted before it hits your calendar</h2>
+      <p>These are not filters on a form — they're questions a human asks on a recorded phone call. If a homeowner fails any of them, the appointment never gets booked.</p>
+    </div>
+
+    <div class="grid grid-4">
+      <div class="card card--hover reveal">
+        <div class="icon-box icon-box--green">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <h4>Verified homeowner</h4>
+        <p class="small">They must legally own the property. Renters, tenants and "my landlord might pay for it" are screened out.</p>
+      </div>
+      <div class="card card--hover reveal" data-delay="1">
+        <div class="icon-box icon-box--green">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h4>Active 30–90 day timeline</h4>
+        <p class="small">Planning to actually start inside three months. "Maybe next year" doesn't get an appointment.</p>
+      </div>
+      <div class="card card--hover reveal" data-delay="2">
+        <div class="icon-box icon-box--green">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9M13 17V5M8 17v-3"/></svg>
+        </div>
+        <h4>Real project scope</h4>
+        <p class="small">Full kitchens, full bathrooms, major renovations. Projects big enough to be worth your drive.</p>
+      </div>
+      <div class="card card--hover reveal" data-delay="3">
+        <div class="icon-box" style="background:var(--red-050);color:var(--red-500)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+        </div>
+        <h4>Handyman work filtered out</h4>
+        <p class="small">Vanity-only swaps, minor plumbing, spot repairs and small patch jobs never reach you.</p>
+      </div>
+    </div>
+
+    <div class="note mt-4 reveal">
+      <strong>The definition is settled before you start.</strong> What counts as a delivered
+      appointment — owner verified, scope real, time confirmed out loud, every decision-maker
+      present — is agreed in writing on the first call. Nothing about it is left to interpretation
+      after the fact.
+    </div>
+  </div>
+</section>
+
+<!-- ========================== EXCLUSIVITY ========================== -->
+<section class="section section--navy">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Exclusivity</span>
+      <h2>The lead isn't exclusive. <em>The appointment is.</em></h2>
+      <p>Most companies are vague about this, so here is the straight version — it is the part
+      contractors are usually surprised by, and we would rather you hear it from us now than
+      work it out later.</p>
+    </div>
+
+    <div class="grid grid-3">
+      <div class="card card--dark reveal">
+        <h4>Nobody comes with you</h4>
+        <p class="small">No other contractor shows up to your appointment. The meeting in that home
+        is yours alone — your hour, your pitch, no one waiting in the driveway.</p>
+      </div>
+      <div class="card card--dark reveal" data-delay="1">
+        <h4>2 to 2.5 bookings on average</h4>
+        <p class="small">A homeowner may meet more than one contractor about the same project —
+        2 to 2.5 times on average — with enough time between the meetings to give you the full
+        opportunity to close before anyone else is in the room.</p>
+      </div>
+      <div class="card card--dark reveal" data-delay="2">
+        <h4>One open meeting at a time</h4>
+        <p class="small">A homeowner never has back-to-back meetings booked by us. There is only
+        ever one appointment ahead of them.</p>
+      </div>
+    </div>
+
+    <div class="card card--dark reveal" style="margin-top:22px">
+      <p class="small mb-0"><strong>Why we tell you this up front.</strong> A company that promises a
+      genuinely exclusive homeowner is either charging you several times this price or is not being
+      straight with you. What we can promise is the meeting: it is yours, it is unshared, and you get
+      first run at it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= VIDEO ============================= -->
+<section class="section" id="video">
+  <div class="container container--narrow">
+    <div class="section-head reveal">
+      <span class="eyebrow">See it working</span>
+      <h2>Two minutes on how appointments actually reach you</h2>
+      <p>What the app looks like, what lands in it, and what you control. No narration about
+      synergy — just the thing itself.</p>
+    </div>
+
+    <div class="video-wrap reveal">
+      <iframe src="https://player.vimeo.com/video/1219214186?dnt=1&amp;title=0&amp;byline=0&amp;portrait=0"
+              title="How RemodeLeads delivers appointments to your calendar"
+              loading="lazy"
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowfullscreen></iframe>
+    </div>
+
+    <div class="btn-row btn-row--center mt-4 reveal">
+      <a class="btn btn--primary btn--lg" href="https://app.remodeleads.com/join">Start Getting Appointments</a>
+      <a class="btn btn--outline btn--lg" href="https://wa.me/972557127466?text=Hi%2C%20I%20came%20from%20your%20website%20and%20I%27d%20love%20to%20ask%20a%20few%20questions." target="_blank" rel="noopener">Ask us on WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== OWNERS + CALL CENTER ===================== -->
+<section class="section">
+  <div class="container">
+    <div class="split reveal">
+      <div class="founder-stack">
+        <div class="founder-photo">
+          <img src="assets/img/team/founders.jpg" alt="Shmuel Mordechay and Shachar Peltz, owners of RemodeLeads" loading="lazy" width="1766" height="933">
+          <div class="founder-photo__cap">
+            <div class="founder-photo__names">Shmuel Mordechay &amp; Shachar Peltz</div>
+            <div class="founder-photo__role">Owners, RemodeLeads</div>
+          </div>
+        </div>
+        <div class="founder-photo">
+          <img src="assets/img/team/booth.jpg" alt="The RemodeLeads team at their trade show booth in Las Vegas" loading="lazy" width="1700" height="1314">
+          <div class="founder-photo__cap">
+            <div class="founder-photo__names">The team at our booth</div>
+            <div class="founder-photo__role">Las Vegas Convention Center</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <span class="eyebrow">Who's behind this</span>
+        <h2>An owner-run agency with its own call centre</h2>
+        <p class="lead">
+          We're not a software company reselling somebody else's leads. <strong>Over 20 agents</strong>
+          work in our own call centre — setting appointments, qualifying every homeowner, and
+          reviewing the calls afterwards.
+        </p>
+        <p>
+          The two of us own the business and run it day to day. Shmuel runs the platform and the
+          numbers; Shachar decides territory, volume and fit. If your county is full or your crew
+          is too small for a track, you'll hear it from one of us directly — before you spend anything.
+        </p>
+
+        <ul class="check-list check-list--yes mt-3">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> <span><strong>20+ in-house agents</strong> — not an outsourced dialler</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> <span><strong>Every homeowner spoken to</strong> by a person before you're billed</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> <span><strong>Calls reviewed, not just counted</strong> — agents are measured on appointments that held</span></li>
+        </ul>
+
+        <a class="link-arrow mt-3" href="about.html#story" style="display:inline-flex">Read why we built it this way <span>→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================== WORK GALLERY ========================= -->
+<section class="section section--soft" id="work">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">The work</span>
+      <h2>These are the projects we put on your calendar</h2>
+      <p>Full kitchens, full baths, whole-home renovations. Jobs big enough that one closed
+      consultation pays for a lot of appointments.</p>
+    </div>
+
+    <div class="work-grid reveal">
+      <div class="work work--feature">
+        <img class="work__img" src="assets/img/work/work-kitchen-1.jpg" alt="Full kitchen remodel with custom cabinetry and open shelving" loading="lazy" width="900" height="600">
+        <div class="work__veil"></div>
+        <div class="work__body">
+          <span class="work__tag">Full Kitchen</span>
+          <div class="work__title">Cabinetry, counters, full tear-out</div>
+          <div class="work__meta">The core of what we book</div>
+        </div>
+      </div>
+
+      <div class="work">
+        <img class="work__img" src="assets/img/work/work-kitchen-2.jpg" alt="Modern kitchen with stone countertops and brass fixtures" loading="lazy" width="900" height="1350">
+        <div class="work__veil"></div>
+        <div class="work__body">
+          <span class="work__tag">Chef Kitchen</span>
+          <div class="work__title">Stone &amp; custom millwork</div>
+        </div>
+      </div>
+
+      <div class="work">
+        <img class="work__img" src="assets/img/work/work-bath-1.jpg" alt="Renovated bathroom with glass walk-in shower" loading="lazy" width="900" height="600">
+        <div class="work__veil"></div>
+        <div class="work__body">
+          <span class="work__tag">Full Bath</span>
+          <div class="work__title">Walk-in shower conversion</div>
+        </div>
+      </div>
+
+      <div class="work">
+        <img class="work__img" src="assets/img/work/work-bath-2.jpg" alt="Master bathroom with freestanding soaking tub" loading="lazy" width="900" height="601">
+        <div class="work__veil"></div>
+        <div class="work__body">
+          <span class="work__tag">Master Bath</span>
+          <div class="work__title">Freestanding tub &amp; vanity</div>
+        </div>
+      </div>
+
+      <div class="work">
+        <img class="work__img" src="assets/img/work/work-whole-2.jpg" alt="Open-plan living and kitchen conversion" loading="lazy" width="900" height="612">
+        <div class="work__veil"></div>
+        <div class="work__body">
+          <span class="work__tag">Whole Home</span>
+          <div class="work__title">Open-plan conversion</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="text-center muted small mt-3 reveal">
+      Representative of the project types we book. We never send you a vanity swap or a faucet repair.
+    </p>
+  </div>
+</section>
+
+<!-- =========================== PRICING ============================= -->
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Pricing</span>
+      <h2>Two ways to buy an appointment</h2>
+      <p>No retainer. No monthly fee. No ad spend. No contract. You are billed when a qualified
+      homeowner is on your calendar, and not before.</p>
+    </div>
+
+    <div class="plans" style="max-width:940px;margin-inline:auto">
+
+      <div class="plan reveal">
+        <div class="plan__name">Basic</div>
+        <div class="plan__for">We generate the demand, qualify it, and put the meeting on your calendar.</div>
+
+        <div class="plan__price">
+          <span class="plan__amount">$250</span>
+          <span class="plan__unit">per appointment</span>
+        </div>
+        <div class="plan__budget">✓ We fund the advertising — you never touch an ad account</div>
+
+        <div class="plan__divider"></div>
+        <ul class="check-list check-list--yes">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> <span>We generate, qualify and book the appointment</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> <span>Every homeowner spoken to by a real person first</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> <span>No retainer, no monthly fee, no contract</span></li>
+        </ul>
+        <ul class="check-list check-list--no">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> <span>You confirm the appointment yourself</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> <span>No credit on cancellations or no-shows</span></li>
+        </ul>
+
+        <div class="plan__cta">
+          <a class="btn btn--outline btn--block btn--lg" href="https://app.remodeleads.com/join">Start with Basic</a>
+        </div>
+      </div>
+
+      <div class="plan plan--featured reveal" data-delay="1">
+        <span class="plan__flag">Recommended</span>
+        <div class="plan__name">Confirmation + Insurance</div>
+        <div class="plan__for">Everything in Basic, and we stand behind whether the door actually opens.</div>
+
+        <div class="plan__price">
+          <span class="plan__amount">$350</span>
+          <span class="plan__unit">per appointment</span>
+        </div>
+        <div class="plan__budget">✓ You effectively pay only if the door opened</div>
+
+        <div class="plan__divider"></div>
+        <ul class="check-list check-list--yes">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> <span><strong>Everything in Basic</strong>, plus:</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> <span>We re-confirm the meeting and update you in real time</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> <span><strong>Canceled or no-show: you get a free appointment credit</strong></span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> <span>Credits are applied automatically — nothing to claim</span></li>
+        </ul>
+
+        <div class="plan__cta">
+          <a class="btn btn--primary btn--block btn--lg" href="https://app.remodeleads.com/join">Start Getting Appointments</a>
+          <p class="small muted text-center mb-0" style="margin-top:12px">Add a card at sign-up. Nothing is charged until an appointment lands.<br>Rather talk first? <a href="https://wa.me/972557127466?text=Hi%2C%20I%20came%20from%20your%20website%20and%20I%27d%20love%20to%20ask%20a%20few%20questions." target="_blank" rel="noopener">Ask us on WhatsApp</a>.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Optional filters -->
+    <div class="section-head reveal mt-4" style="margin-top:62px;margin-bottom:28px">
+      <span class="eyebrow">Optional filters</span>
+      <h2 style="font-size:clamp(1.5rem,2.6vw,2rem)">Narrow it down to the jobs you want</h2>
+      <p>Turn on any filter in the app. Each one is added to the price of every appointment it
+      applies to — and you can switch it off whenever you like.</p>
+    </div>
+
+    <div class="grid grid-3 reveal">
+      <div class="card card--hover">
+        <div class="icon-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <h4>Kitchen only <span style="color:var(--orange-600)">+$35</span></h4>
+        <p class="small">Only homeowners remodeling their kitchen.</p>
+      </div>
+      <div class="card card--hover" data-delay="1">
+        <div class="icon-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15 9 22 9.3 16.5 13.6 18.5 20.5 12 16.4 5.5 20.5 7.5 13.6 2 9.3 9 9"/></svg>
+        </div>
+        <h4>Luxury homes only <span style="color:var(--orange-600)">+$40</span></h4>
+        <p class="small">Properties worth more than $1.5M.</p>
+      </div>
+      <div class="card card--hover" data-delay="2">
+        <div class="icon-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/><path d="M9 9v.01M9 12v.01M9 15v.01M9 18v.01"/></svg>
+        </div>
+        <h4>No apartments or condos <span style="color:var(--orange-600)">+$50</span></h4>
+        <p class="small">Single-family homes only.</p>
+      </div>
+    </div>
+
+    <div class="note mt-4 reveal">
+      <strong>A worked example.</strong> Confirmation + Insurance at $350, with the kitchen-only
+      filter on, is $385 per appointment that reaches your calendar — and if it cancels or nobody
+      is home, you get that appointment back as a credit.
+      <a href="pricing.html">See the full pricing page →</a>
+    </div>
+  </div>
+</section>
+
+<!-- =========================== PAYMENTS ============================ -->
+<section class="section section--soft">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">How payments work</span>
+      <h2>Charged daily, only for what you got</h2>
+      <p>No invoice to chase, no monthly bill to reconcile. You see each appointment and what it
+      cost, the same day it reaches you.</p>
+    </div>
+
+    <div class="grid grid-3">
+      <div class="card card--hover reveal">
+        <div class="icon-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        </div>
+        <h4>Card on file</h4>
+        <p class="small">During sign-up you add a card in the app. Nothing is charged until an
+        appointment actually reaches your calendar.</p>
+      </div>
+      <div class="card card--hover reveal" data-delay="1">
+        <div class="icon-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <h4>Charged each day</h4>
+        <p class="small">Every evening you're charged for the appointments you received that day.
+        Nothing is charged in advance.</p>
+      </div>
+      <div class="card card--hover reveal" data-delay="2">
+        <div class="icon-box icon-box--orange">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+        </div>
+        <h4>Credits, automatically</h4>
+        <p class="small">On Confirmation + Insurance, an appointment that's canceled or
+        rescheduled comes back to you as a credit. Applied automatically — there's nothing to
+        claim and no form to fill in.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================== CALCULATOR =========================== -->
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Run the numbers</span>
+      <h2>What would this actually do for your year?</h2>
+      <p>Move the sliders to your real close rate and average job value. The math updates live.</p>
+    </div>
+
+    <div class="calc" id="roi-calc">
+      <div class="calc__inputs reveal">
+        <div class="tabs" style="width:100%;margin-bottom:28px">
+          <button data-addon="base" class="is-active" style="flex:1">Base · $250</button>
+          <button data-addon="confirmed" style="flex:1">+ Confirmed arrival · $350</button>
+        </div>
+
+        <div class="slider-field" id="calc-appts-wrap">
+          <div class="slider-field__top">
+            <span class="slider-field__label">Appointments per week</span>
+            <span class="slider-field__value" id="calc-appts-out">14/week</span>
+          </div>
+          <input type="range" id="calc-appts" min="2" max="50" step="1" value="14">
+          <div class="slider-field__scale"><span>2</span><span>50</span></div>
+        </div>
+
+        <div class="slider-field">
+          <div class="slider-field__top">
+            <span class="slider-field__label">Average project value</span>
+            <span class="slider-field__value" id="calc-value-out">$35k</span>
+          </div>
+          <input type="range" id="calc-value" min="0" max="100" step="1" value="26">
+          <div class="slider-field__scale"><span>$10k</span><span>$1.2M</span></div>
+        </div>
+
+        <div class="slider-field">
+          <div class="slider-field__top">
+            <span class="slider-field__label">Your close rate</span>
+            <span class="slider-field__value" id="calc-close-out">25%</span>
+          </div>
+          <input type="range" id="calc-close" min="5" max="50" step="1" value="25">
+          <div class="slider-field__scale"><span>5%</span><span>50%</span></div>
+        </div>
+
+        <div class="slider-field">
+          <div class="slider-field__top">
+            <span class="slider-field__label">Your gross margin</span>
+            <span class="slider-field__value" id="calc-margin-out">35%</span>
+          </div>
+          <input type="range" id="calc-margin" min="10" max="60" step="2.5" value="35">
+          <div class="slider-field__scale"><span>10%</span><span>60%</span></div>
+        </div>
+
+        <p class="small muted mb-0" style="margin-top:22px">
+          Most remodeling contractors close 20–35% of consultations they physically attend, at a
+          30–40% gross margin. Set these to your real numbers — the result is only as honest as the inputs.
+        </p>
+      </div>
+
+      <div class="calc__output reveal" data-delay="1">
+        <div class="calc__result-main">
+          <div class="calc__result-label">Projected monthly revenue</div>
+          <div class="calc__result-big" id="res-revenue">$0</div>
+        </div>
+
+        <div class="calc__rows">
+          <div class="calc__row">
+            <span>Appointments delivered / month</span>
+            <span id="res-appts">0</span>
+          </div>
+          <div class="calc__row">
+            <span>Projects closed / month</span>
+            <span id="res-jobs">0</span>
+          </div>
+          <div class="calc__row">
+            <span>Gross profit on those jobs</span>
+            <span id="res-profit">$0</span>
+          </div>
+          <div class="calc__row">
+            <span id="res-cost-label">Total cost</span>
+            <span id="res-cost">$0</span>
+          </div>
+          <div class="calc__row calc__row--accent">
+            <span>Gross profit after our cost</span>
+            <span id="res-net">$0</span>
+          </div>
+          <div class="calc__row calc__row--accent">
+            <span>Gross profit per $1 spent with us</span>
+            <span id="res-roi">0×</span>
+          </div>
+        </div>
+
+        <div class="calc__foot">
+          <p id="res-note" style="margin-bottom:10px"></p>
+          <p class="mb-0"><strong style="color:rgba(255,255,255,.72)">A projection, not a promise.</strong>
+          We measure our cost against your <em>gross profit</em>, not your contract value — that's the
+          honest comparison. Gross profit still has to cover your overhead, and the result depends
+          entirely on your close rate, pricing and how your team runs the consultation.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ APP HUB ============================ -->
+<section class="photo-band">
+  <img class="photo-band__img" src="assets/img/work/work-whole-1.jpg" alt="" aria-hidden="true" loading="lazy">
+  <div class="container">
+    <div class="split split--wide-left">
+      <div class="reveal">
+        <span class="eyebrow">Your control panel</span>
+        <h2>Full campaign control, in your pocket</h2>
+        <p class="lead" style="color:rgba(255,255,255,.78)">
+          Every appointment we book lands in the RemodeLeads contractor app — and so do the dials
+          that decide how many more you get.
+        </p>
+
+        <ul class="check-list check-list--yes check-list--light mt-3">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> <span><strong>Weekly volume controls</strong> — dial your target appointments up or down as your crews free up.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> <span><strong>Instant pause &amp; resume</strong> — job sites full? Hit pause. Nothing new gets booked until you resume.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> <span><strong>Geo-targeting</strong> — pick counties and ZIP codes so you're not driving ninety minutes for a bathroom.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> <span><strong>Service area</strong> — choose the counties and ZIP codes you'll actually drive to.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> <span><strong>Full appointment detail</strong> — homeowner name, phone, exact address, scope notes and confirmed time.</span></li>
+        </ul>
+
+        <div class="btn-row mt-4">
+          <a class="btn btn--primary btn--lg" href="https://app.remodeleads.com/join">Start Getting Appointments →</a>
+          <a class="btn btn--ghost-light btn--lg" href="how-it-works.html">How delivery works</a>
+        </div>
+      </div>
+
+      <div class="reveal" data-delay="1">
+        <div class="phone">
+          <div class="phone__screen">
+            <div class="phone__bar">
+              <span class="phone__bar-title">This Week</span>
+              <span class="badge badge--light" style="font-size:.7rem;padding:4px 10px">6 booked</span>
+            </div>
+            <div class="phone__body">
+              <div class="appt-card">
+                <div class="appt-card__top">
+                  <span class="appt-card__name">D. Alvarez</span>
+                  <span class="appt-card__time">Tue 10:00 AM</span>
+                </div>
+                <div class="appt-card__meta">Full kitchen · Pasadena, 91104<br>Owner verified · 60-day timeline</div>
+              </div>
+              <div class="appt-card">
+                <div class="appt-card__top">
+                  <span class="appt-card__name">M. Chen</span>
+                  <span class="appt-card__time">Wed 2:30 PM</span>
+                </div>
+                <div class="appt-card__meta">Master bath · Irvine, 92602<br>Owner verified · 45-day timeline</div>
+              </div>
+              <div class="appt-card appt-card--pending">
+                <div class="appt-card__top">
+                  <span class="appt-card__name">R. Whitfield</span>
+                  <span class="appt-card__time">Thu 9:15 AM</span>
+                </div>
+                <div class="appt-card__meta">Kitchen + 2 baths · Thousand Oaks<br>Confirming with homeowner</div>
+              </div>
+            </div>
+            <div class="phone__controls">
+              <div class="ctrl">
+                <span class="ctrl__label">Weekly target</span>
+                <span class="ctrl__value">12 appts</span>
+              </div>
+              <div class="ctrl">
+                <span class="ctrl__label">Receiving appointments</span>
+                <span class="switch"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= ACTIVITY FEED ========================= -->
+<section class="section">
+  <div class="container">
+    <div class="split">
+      <div class="reveal">
+        <span class="eyebrow">What delivery looks like</span>
+        <h2>Consultations, booked and confirmed</h2>
+        <p class="lead">
+          This is the shape of what shows up: a real homeowner, a real project, in a county you
+          chose, at a time you agreed to. Not a form fill. Not a shared lead. An appointment.
+        </p>
+        <p class="small muted">
+          Representative examples of the consultations we book — city and project details shown
+          without identifying homeowners.
+        </p>
+        <a class="link-arrow mt-3" href="how-it-works.html" style="display:inline-flex">See the full delivery process <span>→</span></a>
+      </div>
+
+      <div class="reveal" data-delay="1">
+        <div class="ticker" id="activity-feed" aria-live="off"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================== COVERAGE ============================ -->
+<section class="section section--soft">
+  <div class="container container--narrow">
+    <div class="section-head reveal">
+      <span class="eyebrow">Coverage</span>
+      <h2>Where we're booking right now</h2>
+      <p>We deliberately cap how many contractors we run in each territory. When a county fills, it goes to a waitlist rather than getting oversold.</p>
+    </div>
+    <div class="county-grid reveal" id="coverage-grid"></div>
+    <p class="text-center muted small mt-3 reveal">
+      Working outside these counties? <a href="https://wa.me/972557127466?text=Hi%2C%20I%20came%20from%20your%20website%20and%20I%27d%20love%20to%20ask%20a%20few%20questions." target="_blank" rel="noopener">Tell us where</a> — we open new territories based on contractor demand.
+    </p>
+  </div>
+</section>
+
+<!-- ========================= EXPECTATIONS ========================== -->
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Setting expectations</span>
+      <h2>It's a numbers game</h2>
+      <p>We would rather you start with the right picture than a flattering one. This is what
+      advertising-sourced work actually looks like.</p>
+    </div>
+
+    <div class="grid grid-2">
+      <div class="card card--hover reveal">
+        <h4>Not every appointment is the same</h4>
+        <p class="small">Some homeowners are stronger, some weaker. Some jobs are bigger, some
+        smaller. The average is what pays — not any single meeting.</p>
+      </div>
+      <div class="card card--hover reveal" data-delay="1">
+        <h4>Not everyone tells the whole truth</h4>
+        <p class="small">People don't always give the full picture on the phone. We verify what
+        can be verified, but it's worth factoring in.</p>
+      </div>
+      <div class="card card--hover reveal" data-delay="2">
+        <h4>Ads aren't referrals</h4>
+        <p class="small">Homeowners who come from advertising are naturally cooler than a referral
+        or word of mouth. Ours are very strong ad-sourced appointments — but they are not
+        referrals, and we won't pretend otherwise.</p>
+      </div>
+      <div class="card card--dark reveal" data-delay="3">
+        <h4>We do everything we can</h4>
+        <p class="small">Every step, from the ads through to the calls and the confirmation, is
+        built to hand you the best meeting possible. That's the part we control, and we take it
+        seriously.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== FAQ ============================== -->
+<section class="section">
+  <div class="container container--narrow">
+    <div class="section-head reveal">
+      <span class="eyebrow">Straight answers</span>
+      <h2>The questions every contractor asks</h2>
+    </div>
+
+    <div class="accordion reveal">
+      <div class="acc-item">
+        <button class="acc-btn" aria-expanded="false">
+          What exactly am I paying for?
+          <span class="acc-btn__icon">+</span>
+        </button>
+        <div class="acc-panel"><div class="acc-panel__inner">
+          <p>A confirmed, human-verified consultation with a homeowner who owns their property, has a real
+          project, and agreed to a specific day and time. <strong>$250 per appointment</strong> — we
+          fund the advertising ourselves. No retainer, no setup fee, no ad spend, no contract. Optional
+          add-ons sit on top of that base, and you switch them on or off whenever you like.</p>
+        </div></div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-btn" aria-expanded="false">
+          What does the confirmed-arrival add-on actually cover?
+          <span class="acc-btn__icon">+</span>
+        </button>
+        <div class="acc-panel"><div class="acc-panel__inner">
+          <p>For <strong>$100 on top of the $250 base</strong> — $350 in total — we contact the
+          homeowner ahead of the visit, re-confirm the time, verify they'll be there, and keep you
+          updated in real time. If the meeting is canceled or nobody is home, that appointment comes
+          back to you as a credit, applied automatically.</p>
+          <p>It's optional. Some contractors run on the $250 base and handle confirmation calls with
+          their own office. If your crew is tight on time, or a wasted drive costs you more than
+          $100, it pays for itself quickly.</p>
+        </div></div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-btn" aria-expanded="false">
+          What exactly counts as a delivered appointment?
+          <span class="acc-btn__icon">+</span>
+        </button>
+        <div class="acc-panel"><div class="acc-panel__inner">
+          <p>Four things have to be true, and a person confirms every one of them on a recorded call:
+          they legally own the property, the project is real scope, they intend to start within 30 to 90
+          days, and every decision-maker will be there. On top of that, the date and time is one they
+          agreed to out loud, and the address sits inside the ZIP codes you chose. That's the whole
+          definition, and you'll have it in writing before the first one is booked.</p>
+        </div></div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-btn" aria-expanded="false">
+          Is the appointment exclusive to me?
+          <span class="acc-btn__icon">+</span>
+        </button>
+        <div class="acc-panel"><div class="acc-panel__inner">
+          <p>The consultation slot is 100% yours — we never send two contractors to the same homeowner at the
+          same time, and we cap how many contractors we run per territory. A homeowner is of course free to get
+          other quotes on their own; what we guarantee is that we aren't the ones selling them to your competitor.</p>
+        </div></div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-btn" aria-expanded="false">
+          How fast can I start?
+          <span class="acc-btn__icon">+</span>
+        </button>
+        <div class="acc-panel"><div class="acc-panel__inner">
+          <p>A 15-minute call to set your territory, weekly volume and track. Then campaign setup, and
+          appointments typically begin landing within the first couple of weeks once campaigns are live and
+          learning. If your county is at capacity we'll tell you on that first call rather than taking your money.</p>
+        </div></div>
+      </div>
+    </div>
+
+    <p class="text-center mt-3 reveal"><a class="link-arrow" href="faq.html">Read all FAQs <span>→</span></a></p>
+  </div>
+</section>
+
+<!-- ============================ CTA BAND =========================== -->
+<section class="cta-band">
+  <div class="container">
+    <div class="cta-band__inner reveal">
+      <h2>Find out if your territory is still open</h2>
+      <p>Fifteen minutes. We'll tell you what capacity looks like in your county, which track fits your
+      crew size, and what your first month would realistically look like. If it's not a fit, we'll say so.</p>
+      <div class="btn-row btn-row--center">
+        <a class="btn btn--primary btn--lg" href="https://app.remodeleads.com/join">Start Getting Appointments</a>
+        <a class="btn btn--ghost-light btn--lg" href="https://wa.me/972557127466?text=Hi%2C%20I%20came%20from%20your%20website%20and%20I%27d%20love%20to%20ask%20a%20few%20questions." target="_blank" rel="noopener">Ask us on WhatsApp</a>
+      </div>
+      <p class="cta-band__note">No card required to talk. No contract if you start. &nbsp;·&nbsp; Prefer to talk now? <a href="tel:+13238008381" style="color:var(--orange-400)">(323) 800-8381</a></p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================= FOOTER ============================ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer__grid footer">
+      <div class="footer__brand">
+        <img src="assets/img/logo.png" alt="RemodeLeads">
+        <p>Pre-booked, human-verified kitchen and bath consultations for remodeling contractors across Southern California.</p>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <ul>
+          <li><a href="about.html">About us</a></li>
+          <li><a href="how-it-works.html">How it works</a></li>
+          <li><a href="who-its-for.html">Who it's for</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Get started</h5>
+        <ul>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="https://wa.me/972557127466?text=Hi%2C%20I%20came%20from%20your%20website%20and%20I%27d%20love%20to%20ask%20a%20few%20questions." target="_blank" rel="noopener">WhatsApp us</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="tel:+13238008381">(323) 800-8381</a></li>
+          <li><a href="mailto:info@remodeleads.com">info@remodeleads.com</a></li>
+          <li class="muted" style="color:rgba(255,255,255,.45)">Southern California</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© <span data-year>2026</span> RemodeLeads. All rights reserved.</span>
+      <span>Serving Los Angeles · Orange · Ventura · San Bernardino · Riverside · Kern</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/site.js?v=7"></script>
+</body>
+</html>
