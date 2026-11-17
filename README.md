@@ -3,8 +3,7 @@
 The public site for RemodeLeads: pre-booked kitchen & bath appointments for
 Southern California contractors.
 
-Plain HTML/CSS/JS. **No build step, no dependencies.** Open `index.html` and it
-works, or serve the folder:
+Plain HTML/CSS/JS. **No build step, no dependencies.** Open `index.html`, or:
 
 ```sh
 python3 -m http.server 5200
@@ -12,12 +11,13 @@ python3 -m http.server 5200
 
 ## Deploying
 
-GitHub Pages publishes the root of `main` automatically. After editing CSS or
-JS you **must** bump the `?v=` on the `<link>` and `<script>` tags in every
-HTML file, or returning visitors keep the cached copy:
+GitHub Pages publishes the root of `main` automatically.
+
+After editing CSS or JS you **must** bump the `?v=` on the `<link>` and
+`<script>` tags in every HTML file, or returning visitors keep the cached copy:
 
 ```sh
-sed -i '' 's|?v=7|?v=8|g' *.html
+sed -i '' 's|?v=8|?v=9|g' *.html
 ```
 
 ## Layout
@@ -26,22 +26,18 @@ sed -i '' 's|?v=7|?v=8|g' *.html
 |---|---|
 | `index.html` | Home — the full pitch |
 | `how-it-works.html` | Delivery process end to end |
-| `pricing.html` | Basic $250 · Confirmation + Insurance $350 · optional filters |
+| `pricing.html` | The two plans and the optional filters |
 | `who-its-for.html` | Fit by company size |
 | `faq.html` | Straight answers |
 | `about.html` | Owners, call centre, principles |
 | `book.html` | Contact — WhatsApp, phone, or self-signup |
-| `quote.html` | Renders a proposal from a `?d=` payload. Blank without one. |
 | `assets/js/site.js` | One `CONFIG` block: pricing, counties, contact details |
 
-Contact details and prices live in the `CONFIG` block at the top of
+Prices, counties and contact details live in the `CONFIG` block at the top of
 `assets/js/site.js`. Change them there, not in the markup.
 
-## Not in this repo
+## This repo is public
 
-The internal proposal builder is deliberately absent — it is an internal
-pricing tool and this repo is public.
-
-The proposal viewer is not here either. It depends on a script holding
-commercial terms used only in privately negotiated deals, so it stays on the
-internal host alongside the builder that generates its links.
+It is generated from an internal working copy by `scripts/sync-public-site.sh`,
+which deliberately leaves out the proposal builder and viewer: they depend on a
+script carrying commercial terms that are not public. Don't add them by hand.
