@@ -38,7 +38,9 @@
     // Keep in sync with pricing.html and the quote builder.
     appointmentFee: 250,
 
-    // Optional filters the contractor switches on in the app. Per appointment.
+    // Optional filters the contractor switches on in the app. Per APPOINTMENT -
+    // the app calls these 'per lead', the site never does. See the comment above
+    // the picker markup in index.html.
     // 'confirmed' is the Confirmation + Insurance plan: 250 + 100 = the $350
     // headline price. The other three are targeting filters.
     addOns: {
