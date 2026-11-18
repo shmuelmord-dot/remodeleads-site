@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
 <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
-<link rel="stylesheet" href="assets/css/styles.css?v=13">
+<link rel="stylesheet" href="assets/css/styles.css?v=14">
 </head>
 <body>
 
@@ -687,56 +687,86 @@
         </div>
       </div>
 
-      <!-- Live picker. Mirrors the real app screen; totals come from CONFIG in site.js -->
+      <!-- Mirrors the "Add-ons & filters" screen in the contractor app.
+           Every figure is read from CONFIG in site.js, never hardcoded here. -->
       <div class="picker" id="picker" role="group" aria-label="Choose the appointments you want">
+
         <div class="picker__bar">
+          <span class="picker__bar-title">Add-ons &amp; filters</span>
           <span class="picker__live"><span class="dot dot--pulse"></span> Live</span>
-          <span class="picker__title">Your settings</span>
+        </div>
+
+        <div class="picker__head">
+          <div class="picker__head-main">
+            <div class="picker__label">Your price per appointment</div>
+            <div class="picker__total" id="picker-total" aria-live="polite">$250</div>
+            <span class="picker__badge"><span class="dot dot--pulse"></span> From next appointment</span>
+          </div>
+          <div class="picker__head-side">
+            <div class="picker__line"><span>Basic</span><strong>$250</strong></div>
+            <div class="picker__line" id="picker-line-conf" hidden><span>Confirmation + Insurance</span><strong>+$100</strong></div>
+            <div class="picker__line" id="picker-line-filters" hidden><span>Filters</span><strong>+$0</strong></div>
+          </div>
         </div>
 
         <div class="picker__body">
-          <div class="picker__label">Plan</div>
-          <div class="picker__plans" role="radiogroup" aria-label="Plan">
-            <button type="button" class="picker__plan is-on" data-plan="basic" role="radio" aria-checked="true">
-              <span class="picker__plan-name">Basic</span>
-              <span class="picker__plan-price">$250</span>
-            </button>
-            <button type="button" class="picker__plan" data-plan="confirmed" role="radio" aria-checked="false">
-              <span class="picker__plan-name">Confirmation + Insurance</span>
-              <span class="picker__plan-price">$350</span>
-            </button>
-          </div>
+          <div class="picker__label">Basic</div>
+          <p class="picker__desc">Pre-booked appointment. We generate the demand, qualify it and book
+          the meeting onto your calendar. From there it's yours — you confirm it, and a cancellation
+          or no-show isn't credited.</p>
 
-          <div class="picker__label">Only send me</div>
+          <div class="picker__label picker__label--mt">Service</div>
+          <button type="button" class="picker__opt picker__opt--service" data-plan-toggle aria-pressed="false">
+            <span class="picker__opt-text">
+              <strong class="picker__opt-name">Confirmation + Insurance</strong>
+              <em class="picker__opt-sub">We don't just set the appointment — we confirm it and update
+              you in real time. If it doesn't happen, or the homeowner cancels ahead of it, your next
+              appointment of the same type is free.</em>
+            </span>
+            <span class="picker__opt-right">
+              <span class="picker__opt-price">+$100</span>
+              <span class="picker__sw" aria-hidden="true"></span>
+            </span>
+          </button>
+
+          <div class="picker__label picker__label--mt">
+            Filters <span class="picker__hint">Fewer appointments may match</span>
+          </div>
           <ul class="picker__opts">
             <li>
               <button type="button" class="picker__opt" data-filter="kitchen" aria-pressed="false">
-                <span class="picker__sw" aria-hidden="true"></span>
                 <span class="picker__opt-text">
-                  <strong>Kitchen only</strong>
-                  <em>Homeowners remodeling their kitchen</em>
+                  <strong class="picker__opt-name">Kitchen only</strong>
+                  <em class="picker__opt-sub">Kitchen remodel projects only.</em>
                 </span>
-                <span class="picker__opt-price">+$35</span>
+                <span class="picker__opt-right">
+                  <span class="picker__opt-price">+$35</span>
+                  <span class="picker__sw" aria-hidden="true"></span>
+                </span>
               </button>
             </li>
             <li>
               <button type="button" class="picker__opt" data-filter="luxury" aria-pressed="false">
-                <span class="picker__sw" aria-hidden="true"></span>
                 <span class="picker__opt-text">
-                  <strong>Luxury homes only</strong>
-                  <em>Properties worth more than $1.5M</em>
+                  <strong class="picker__opt-name">Luxury homes only</strong>
+                  <em class="picker__opt-sub">Property value above $1.5M.</em>
                 </span>
-                <span class="picker__opt-price">+$40</span>
+                <span class="picker__opt-right">
+                  <span class="picker__opt-price">+$40</span>
+                  <span class="picker__sw" aria-hidden="true"></span>
+                </span>
               </button>
             </li>
             <li>
               <button type="button" class="picker__opt" data-filter="noApartments" aria-pressed="false">
-                <span class="picker__sw" aria-hidden="true"></span>
                 <span class="picker__opt-text">
-                  <strong>No apartments or condos</strong>
-                  <em>Single-family homes only</em>
+                  <strong class="picker__opt-name">No apartments and condos</strong>
+                  <em class="picker__opt-sub">Single-family homes only.</em>
                 </span>
-                <span class="picker__opt-price">+$50</span>
+                <span class="picker__opt-right">
+                  <span class="picker__opt-price">+$50</span>
+                  <span class="picker__sw" aria-hidden="true"></span>
+                </span>
               </button>
             </li>
           </ul>
@@ -747,7 +777,7 @@
             <div class="picker__total-label">Per appointment</div>
             <div class="picker__note" id="picker-note">Updated instantly</div>
           </div>
-          <div class="picker__total" id="picker-total" aria-live="polite">$250</div>
+          <div class="picker__foot-total" id="picker-foot-total">$250</div>
         </div>
       </div>
     </div>
@@ -1243,6 +1273,6 @@
   </div>
 </footer>
 
-<script src="assets/js/site.js?v=13"></script>
+<script src="assets/js/site.js?v=14"></script>
 </body>
 </html>

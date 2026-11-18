@@ -1741,12 +1741,13 @@ input[type="range"]::-moz-range-thumb {
 
 /* ---------------------------------------------------------------------------
    Live filter picker
-   Styled as a screen from the contractor app rather than a price table: the
-   point of the section is that these are switches you flip yourself and the
-   cost updates immediately.
+   Mirrors the "Add-ons & filters" screen in the contractor app. Every text
+   colour here is declared explicitly: the global `strong, b { color: ink }`
+   rule would otherwise paint the option names near-black on this dark card,
+   which is exactly what happened the first time round.
    --------------------------------------------------------------------------- */
 .picker {
-  background: var(--navy-900);
+  background: #11202f;
   border-radius: var(--r-xl);
   box-shadow: var(--sh-lg);
   overflow: hidden;
@@ -1754,107 +1755,138 @@ input[type="range"]::-moz-range-thumb {
 }
 .picker__bar {
   display: flex; align-items: center; gap: 12px;
-  padding: 14px 18px;
-  background: rgba(255, 255, 255, .06);
-  border-bottom: 1px solid rgba(255, 255, 255, .08);
+  padding: 15px 18px;
+  background: #0d1a26;
+  border-bottom: 1px solid rgba(255, 255, 255, .07);
 }
+.picker__bar-title { font-weight: 700; font-size: .95rem; color: #fff; }
 .picker__live {
+  margin-left: auto;
   display: inline-flex; align-items: center; gap: 7px;
-  font-size: .76rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
-  color: #6ee7a8;
+  font-size: .7rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
+  color: #5fd49a;
 }
-.picker__title { font-size: .86rem; color: rgba(255, 255, 255, .62); }
 
-.picker__body { padding: 20px 18px 6px; }
+/* price summary */
+.picker__head {
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 18px;
+  padding: 20px 18px 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, .07);
+}
+.picker__head-main { min-width: 0; }
 .picker__label {
   font-size: .72rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase;
-  color: rgba(255, 255, 255, .48);
-  margin-bottom: 10px;
+  color: rgba(255, 255, 255, .5);
+  margin-bottom: 8px;
 }
-.picker__plans { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
-.picker__plan {
-  display: flex; flex-direction: column; gap: 4px; align-items: flex-start;
-  padding: 13px 14px; text-align: left;
-  background: rgba(255, 255, 255, .05);
-  border: 1.5px solid rgba(255, 255, 255, .12);
-  border-radius: var(--r);
-  color: #fff; cursor: pointer;
-  transition: border-color .18s var(--ease), background-color .18s var(--ease);
+.picker__label--mt { margin-top: 24px; }
+.picker__hint {
+  float: right;
+  letter-spacing: .02em; text-transform: none; font-weight: 600;
+  color: rgba(255, 255, 255, .42);
 }
-.picker__plan:hover { background: rgba(255, 255, 255, .09); }
-.picker__plan.is-on { border-color: var(--orange-500); background: rgba(240, 122, 44, .14); }
-.picker__plan-name  { font-size: .82rem; font-weight: 700; line-height: 1.25; }
-.picker__plan-price { font-size: 1.15rem; font-weight: 800; font-family: var(--font-display); }
+.picker__total {
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 6vw, 2.8rem); font-weight: 800; line-height: 1;
+  color: #fff;
+}
+.picker__badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  margin-top: 12px; padding: 6px 12px;
+  border-radius: var(--r-pill);
+  background: rgba(37, 173, 112, .18);
+  font-size: .7rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+  color: #5fd49a;
+}
+.picker__head-side { text-align: right; flex: none; }
+.picker__line {
+  display: flex; gap: 14px; justify-content: flex-end;
+  font-size: .82rem; line-height: 1.5;
+  color: rgba(255, 255, 255, .62);
+}
+.picker__line strong { color: #fff; font-weight: 700; }
 
+.picker__body { padding: 20px 18px 8px; }
+.picker__desc { font-size: .86rem; line-height: 1.6; color: rgba(255, 255, 255, .66); margin: 0; }
+
+/* options */
 .picker__opts { list-style: none; margin: 0; padding: 0; }
-.picker__opts li + li { margin-top: 8px; }
+.picker__opts li + li { margin-top: 9px; }
 .picker__opt {
   width: 100%;
-  display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 13px;
-  padding: 13px 14px; text-align: left;
-  background: rgba(255, 255, 255, .05);
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 15px; text-align: left;
+  background: rgba(255, 255, 255, .045);
   border: 1.5px solid rgba(255, 255, 255, .1);
   border-radius: var(--r);
-  color: #fff; cursor: pointer;
+  cursor: pointer;
   transition: border-color .18s var(--ease), background-color .18s var(--ease);
 }
-.picker__opt:hover { background: rgba(255, 255, 255, .09); }
-.picker__opt[aria-pressed="true"] { border-color: var(--orange-500); background: rgba(240, 122, 44, .12); }
+.picker__opt--service { align-items: flex-start; margin-bottom: 4px; }
+.picker__opt:hover { background: rgba(255, 255, 255, .08); }
+.picker__opt[aria-pressed="true"] { border-color: var(--orange-500); background: rgba(240, 122, 44, .13); }
+
+.picker__opt-text { min-width: 0; flex: 1; }
+/* explicit, so the global strong/em rules cannot darken these */
+.picker__opt-name {
+  display: block; font-size: .95rem; font-weight: 700; color: #fff;
+}
+.picker__opt-sub {
+  display: block; font-style: normal;
+  font-size: .8rem; line-height: 1.55; color: rgba(255, 255, 255, .58); margin-top: 3px;
+}
+.picker__opt-right { display: flex; align-items: center; gap: 13px; flex: none; }
+.picker__opt--service .picker__opt-right { margin-top: 2px; }
+.picker__opt-price { font-size: .92rem; font-weight: 800; color: var(--orange-400); }
 
 .picker__sw {
-  width: 38px; height: 22px; flex: none;
+  width: 44px; height: 26px; flex: none;
   border-radius: 999px;
-  background: rgba(255, 255, 255, .18);
+  background: rgba(255, 255, 255, .17);
   position: relative;
   transition: background-color .2s var(--ease);
 }
 .picker__sw::after {
   content: ""; position: absolute; top: 3px; left: 3px;
-  width: 16px; height: 16px; border-radius: 50%;
+  width: 20px; height: 20px; border-radius: 50%;
   background: #fff;
   transition: transform .2s var(--ease);
 }
 .picker__opt[aria-pressed="true"] .picker__sw { background: var(--orange-500); }
-.picker__opt[aria-pressed="true"] .picker__sw::after { transform: translateX(16px); }
-
-.picker__opt-text { display: block; min-width: 0; }
-.picker__opt-text strong { display: block; font-size: .9rem; font-weight: 700; }
-.picker__opt-text em {
-  display: block; font-style: normal;
-  font-size: .78rem; color: rgba(255, 255, 255, .55); margin-top: 2px;
-}
-.picker__opt-price { font-size: .88rem; font-weight: 700; color: var(--orange-400); }
+.picker__opt[aria-pressed="true"] .picker__sw::after { transform: translateX(18px); }
 
 .picker__foot {
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
-  margin-top: 18px; padding: 16px 18px;
-  background: rgba(255, 255, 255, .06);
-  border-top: 1px solid rgba(255, 255, 255, .08);
+  margin-top: 20px; padding: 16px 18px;
+  background: #0d1a26;
+  border-top: 1px solid rgba(255, 255, 255, .07);
 }
 .picker__total-label {
   font-size: .72rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
   color: rgba(255, 255, 255, .52);
 }
-.picker__note { font-size: .8rem; color: #6ee7a8; margin-top: 3px; }
-.picker__total {
+.picker__note { font-size: .8rem; color: #5fd49a; margin-top: 3px; }
+.picker__foot-total {
   font-family: var(--font-display);
-  font-size: clamp(1.8rem, 5vw, 2.3rem); font-weight: 800; line-height: 1;
+  font-size: clamp(1.7rem, 5vw, 2.1rem); font-weight: 800; line-height: 1; color: #fff;
 }
-.picker__total.is-bump { animation: pickerBump .32s var(--ease); }
+.picker__foot-total.is-bump, .picker__total.is-bump { animation: pickerBump .32s var(--ease); }
 @keyframes pickerBump {
   0%   { transform: scale(1);    color: #fff; }
-  40%  { transform: scale(1.09); color: var(--orange-400); }
+  40%  { transform: scale(1.08); color: var(--orange-400); }
   100% { transform: scale(1);    color: #fff; }
 }
 
 @media (max-width: 560px) {
-  .picker__plans { grid-template-columns: 1fr; }
-  .picker__opt   { grid-template-columns: auto 1fr; row-gap: 4px; }
-  /* price drops under the label rather than squeezing the description */
-  .picker__opt-price { grid-column: 2; justify-self: start; }
+  .picker__head { flex-direction: column; gap: 14px; }
+  .picker__head-side { text-align: left; width: 100%; }
+  .picker__line { justify-content: space-between; }
+  .picker__hint { float: none; display: block; margin-top: 4px; }
+  .picker__opt { flex-wrap: wrap; }
+  .picker__opt-right { width: 100%; justify-content: space-between; margin-top: 4px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .picker__total.is-bump { animation: none; }
+  .picker__foot-total.is-bump, .picker__total.is-bump { animation: none; }
 }
 
 /* live badge inside the phone mock — reads as a running screen, not a picture */

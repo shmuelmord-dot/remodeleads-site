@@ -782,54 +782,69 @@
     setTimeout(rescue, 9000);   // second pass for slow connections
   }
 
+  /* ----------------------------------------------------------------------
+     10a. Live filter picker
+          Mirrors the app's "Add-ons & filters" screen. Prices come from
+          CONFIG, never from the markup, so the picker cannot drift from the
+          pricing section sitting directly above it.
+     ---------------------------------------------------------------------- */
   function initPicker() {
     var picker = $('#picker');
     if (!picker) return;
 
-    var totalEl = $('#picker-total', picker);
-    var noteEl  = $('#picker-note', picker);
-    var plan    = 'basic';
+    var totalEl  = $('#picker-total', picker);
+    var footEl   = $('#picker-foot-total', picker);
+    var noteEl   = $('#picker-note', picker);
+    var lineConf = $('#picker-line-conf', picker);
+    var lineFilt = $('#picker-line-filters', picker);
+    var confBtn  = $('[data-plan-toggle]', picker);
+
+    var usd = function (n) { return '$' + n.toLocaleString('en-US'); };
 
     function render(changed) {
-      var total = CONFIG.appointmentFee;
-      if (plan === 'confirmed') total += CONFIG.addOns.confirmed.price;
+      var confirmed = confBtn.getAttribute('aria-pressed') === 'true';
+      var filters = 0, on = 0;
 
-      var on = 0;
       $$('[data-filter]', picker).forEach(function (btn) {
         if (btn.getAttribute('aria-pressed') !== 'true') return;
         var addOn = CONFIG.addOns[btn.dataset.filter];
-        if (addOn) { total += addOn.price; on++; }
+        if (addOn) { filters += addOn.price; on++; }
       });
 
-      totalEl.textContent = '$' + total.toLocaleString('en-US');
+      var total = CONFIG.appointmentFee +
+                  (confirmed ? CONFIG.addOns.confirmed.price : 0) + filters;
+
+      totalEl.textContent = usd(total);
+      footEl.textContent  = usd(total);
+
+      // the breakdown shows only the lines that actually apply
+      lineConf.hidden = !confirmed;
+      lineFilt.hidden = !on;
+      if (on) lineFilt.querySelector('strong').textContent = '+' + usd(filters);
+
       noteEl.textContent = on
-        ? (on === 1 ? '1 filter on · applies immediately' : on + ' filters on · applies immediately')
+        ? (on === 1 ? '1 filter on \u00b7 applies immediately'
+                    : on + ' filters on \u00b7 applies immediately')
         : 'Updated instantly';
 
       if (changed) {
-        totalEl.classList.remove('is-bump');
-        void totalEl.offsetWidth;            // restart the animation
-        totalEl.classList.add('is-bump');
+        [totalEl, footEl].forEach(function (el) {
+          el.classList.remove('is-bump');
+          void el.offsetWidth;            // restart the animation
+          el.classList.add('is-bump');
+        });
       }
     }
 
-    $$('[data-plan]', picker).forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        plan = btn.dataset.plan;
-        $$('[data-plan]', picker).forEach(function (b) {
-          var on = b === btn;
-          b.classList.toggle('is-on', on);
-          b.setAttribute('aria-checked', on ? 'true' : 'false');
-        });
-        render(true);
-      });
-    });
+    function toggle(btn) {
+      btn.setAttribute('aria-pressed',
+        btn.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
+      render(true);
+    }
 
+    confBtn.addEventListener('click', function () { toggle(confBtn); });
     $$('[data-filter]', picker).forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        btn.setAttribute('aria-pressed', btn.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
-        render(true);
-      });
+      btn.addEventListener('click', function () { toggle(btn); });
     });
 
     render(false);
