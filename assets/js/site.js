@@ -735,6 +735,65 @@
          user's mail client with everything pre-filled. Swap `submitLead`
          for a real endpoint (Formspree / Firebase / CRM webhook) later.
      ---------------------------------------------------------------------- */
+  /* ----------------------------------------------------------------------
+     10a. Live filter picker
+          Mirrors the app's settings screen. Prices come from CONFIG, never
+          from the markup, so the picker can't drift from the pricing section
+          sitting directly above it.
+     ---------------------------------------------------------------------- */
+  function initPicker() {
+    var picker = $('#picker');
+    if (!picker) return;
+
+    var totalEl = $('#picker-total', picker);
+    var noteEl  = $('#picker-note', picker);
+    var plan    = 'basic';
+
+    function render(changed) {
+      var total = CONFIG.appointmentFee;
+      if (plan === 'confirmed') total += CONFIG.addOns.confirmed.price;
+
+      var on = 0;
+      $$('[data-filter]', picker).forEach(function (btn) {
+        if (btn.getAttribute('aria-pressed') !== 'true') return;
+        var addOn = CONFIG.addOns[btn.dataset.filter];
+        if (addOn) { total += addOn.price; on++; }
+      });
+
+      totalEl.textContent = '$' + total.toLocaleString('en-US');
+      noteEl.textContent = on
+        ? (on === 1 ? '1 filter on · applies immediately' : on + ' filters on · applies immediately')
+        : 'Updated instantly';
+
+      if (changed) {
+        totalEl.classList.remove('is-bump');
+        void totalEl.offsetWidth;            // restart the animation
+        totalEl.classList.add('is-bump');
+      }
+    }
+
+    $$('[data-plan]', picker).forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        plan = btn.dataset.plan;
+        $$('[data-plan]', picker).forEach(function (b) {
+          var on = b === btn;
+          b.classList.toggle('is-on', on);
+          b.setAttribute('aria-checked', on ? 'true' : 'false');
+        });
+        render(true);
+      });
+    });
+
+    $$('[data-filter]', picker).forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        btn.setAttribute('aria-pressed', btn.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
+        render(true);
+      });
+    });
+
+    render(false);
+  }
+
   function initApplyForm() {
     var form = $('#apply-form');
     if (!form) return;
@@ -902,6 +961,7 @@
     initCoverageGrid();
     initActivityFeed();
     initCalculator();
+    initPicker();
     initApplyForm();
     initStory();
     initScheduler();

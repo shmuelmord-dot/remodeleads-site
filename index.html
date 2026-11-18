@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
 <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
-<link rel="stylesheet" href="assets/css/styles.css?v=8">
+<link rel="stylesheet" href="assets/css/styles.css?v=10">
 </head>
 <body>
 
@@ -658,35 +658,97 @@
 
     </div>
 
-    <!-- Optional filters -->
+    <!-- Optional filters — an interactive app screen, not a price list -->
     <div class="section-head reveal mt-4" style="margin-top:62px;margin-bottom:28px">
       <span class="eyebrow">Optional filters</span>
-      <h2 style="font-size:clamp(1.5rem,2.6vw,2rem)">Narrow it down to the jobs you want</h2>
-      <p>Turn on any filter in the app. Each one is added to the price of every appointment it
-      applies to — and you can switch it off whenever you like.</p>
+      <h2 style="font-size:clamp(1.5rem,2.6vw,2rem)">You decide which appointments you'll take</h2>
+      <p>Every one of these is a switch inside the app. Flip it and the next appointment follows
+      the new rule — no email, no account manager, no waiting until Monday.</p>
     </div>
 
-    <div class="grid grid-3 reveal">
-      <div class="card card--hover">
-        <div class="icon-box">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <div class="split split--wide-right reveal">
+
+      <div>
+        <div class="card mb-3">
+          <h4>Change it whenever you want</h4>
+          <p class="small">Turn the kitchen filter on at eleven on a Sunday night and the very next
+          booking respects it. Turn it off in the morning and the targeting widens again. Nothing
+          needs our approval.</p>
         </div>
-        <h4>Kitchen only <span style="color:var(--orange-600)">+$35</span></h4>
-        <p class="small">Only homeowners remodeling their kitchen.</p>
+        <div class="card mb-3">
+          <h4>You see the price before you commit</h4>
+          <p class="small">The app shows the per-appointment cost as you change the settings, so you
+          always know what the next appointment will cost before you accept another one.</p>
+        </div>
+        <div class="card">
+          <h4>Narrower means fewer, not worse</h4>
+          <p class="small">Every filter shrinks the pool it draws from. That's the trade: a tighter
+          fit for your crew, at a slightly higher price and usually a slower pace.</p>
+        </div>
       </div>
-      <div class="card card--hover" data-delay="1">
-        <div class="icon-box">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15 9 22 9.3 16.5 13.6 18.5 20.5 12 16.4 5.5 20.5 7.5 13.6 2 9.3 9 9"/></svg>
+
+      <!-- Live picker. Mirrors the real app screen; totals come from CONFIG in site.js -->
+      <div class="picker" id="picker" role="group" aria-label="Choose the appointments you want">
+        <div class="picker__bar">
+          <span class="picker__live"><span class="dot dot--pulse"></span> Live</span>
+          <span class="picker__title">Your settings</span>
         </div>
-        <h4>Luxury homes only <span style="color:var(--orange-600)">+$40</span></h4>
-        <p class="small">Properties worth more than $1.5M.</p>
-      </div>
-      <div class="card card--hover" data-delay="2">
-        <div class="icon-box">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/><path d="M9 9v.01M9 12v.01M9 15v.01M9 18v.01"/></svg>
+
+        <div class="picker__body">
+          <div class="picker__label">Plan</div>
+          <div class="picker__plans" role="radiogroup" aria-label="Plan">
+            <button type="button" class="picker__plan is-on" data-plan="basic" role="radio" aria-checked="true">
+              <span class="picker__plan-name">Basic</span>
+              <span class="picker__plan-price">$250</span>
+            </button>
+            <button type="button" class="picker__plan" data-plan="confirmed" role="radio" aria-checked="false">
+              <span class="picker__plan-name">Confirmation + Insurance</span>
+              <span class="picker__plan-price">$350</span>
+            </button>
+          </div>
+
+          <div class="picker__label">Only send me</div>
+          <ul class="picker__opts">
+            <li>
+              <button type="button" class="picker__opt" data-filter="kitchen" aria-pressed="false">
+                <span class="picker__sw" aria-hidden="true"></span>
+                <span class="picker__opt-text">
+                  <strong>Kitchen only</strong>
+                  <em>Homeowners remodeling their kitchen</em>
+                </span>
+                <span class="picker__opt-price">+$35</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="picker__opt" data-filter="luxury" aria-pressed="false">
+                <span class="picker__sw" aria-hidden="true"></span>
+                <span class="picker__opt-text">
+                  <strong>Luxury homes only</strong>
+                  <em>Properties worth more than $1.5M</em>
+                </span>
+                <span class="picker__opt-price">+$40</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="picker__opt" data-filter="noApartments" aria-pressed="false">
+                <span class="picker__sw" aria-hidden="true"></span>
+                <span class="picker__opt-text">
+                  <strong>No apartments or condos</strong>
+                  <em>Single-family homes only</em>
+                </span>
+                <span class="picker__opt-price">+$50</span>
+              </button>
+            </li>
+          </ul>
         </div>
-        <h4>No apartments or condos <span style="color:var(--orange-600)">+$50</span></h4>
-        <p class="small">Single-family homes only.</p>
+
+        <div class="picker__foot">
+          <div>
+            <div class="picker__total-label">Per appointment</div>
+            <div class="picker__note" id="picker-note">Updated instantly</div>
+          </div>
+          <div class="picker__total" id="picker-total" aria-live="polite">$250</div>
+        </div>
       </div>
     </div>
 
@@ -848,11 +910,12 @@
   <div class="container">
     <div class="split split--wide-left">
       <div class="reveal">
-        <span class="eyebrow">Your control panel</span>
-        <h2>Full campaign control, in your pocket</h2>
+        <span class="eyebrow">The app</span>
+        <h2>You set the rules. It runs on its own.</h2>
         <p class="lead" style="color:rgba(255,255,255,.78)">
-          Every appointment we book lands in the RemodeLeads contractor app — and so do the dials
-          that decide how many more you get.
+          There is no portal to log into on a laptop and no report emailed to you on Monday. It is
+          an app on your phone, and it updates the moment something happens — an appointment is
+          booked, confirmed, moved or credited, and you see it as it lands.
         </p>
 
         <ul class="check-list check-list--yes check-list--light mt-3">
@@ -874,6 +937,7 @@
           <div class="phone__screen">
             <div class="phone__bar">
               <span class="phone__bar-title">This Week</span>
+              <span class="phone__live"><span class="dot dot--pulse"></span> Live</span>
               <span class="badge badge--light" style="font-size:.7rem;padding:4px 10px">6 booked</span>
             </div>
             <div class="phone__body">
@@ -1178,6 +1242,6 @@
   </div>
 </footer>
 
-<script src="assets/js/site.js?v=8"></script>
+<script src="assets/js/site.js?v=10"></script>
 </body>
 </html>

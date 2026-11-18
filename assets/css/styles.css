@@ -558,14 +558,27 @@ strong, b { color: var(--ink); font-weight: 700; }
 .hero__dot {
   width: 30px; height: 3px; border-radius: 3px; border: 0; padding: 0;
   background: rgba(255, 255, 255, .28);
-  overflow: hidden; position: relative;
+  position: relative;
   transition: background-color .3s var(--ease);
+}
+.hero__dot::before {
+  /* 44x44 touch target over a 3px-tall control. Apple/WCAG minimum; without
+     it these are effectively untappable on a phone. */
+  content: "";
+  position: absolute;
+  left: 50%; top: 50%;
+  /* as wide as the dot plus its gap, so neighbouring targets never overlap
+     and a tap can't activate the wrong slide */
+  width: calc(100% + 9px); height: 44px;
+  transform: translate(-50%, -50%);
 }
 .hero__dot:hover { background: rgba(255, 255, 255, .5); }
 .hero__dot.is-active { background: rgba(255, 255, 255, .3); }
 .hero__dot.is-active::after {
   content: "";
   position: absolute; inset: 0;
+  border-radius: inherit;
+  overflow: hidden;
   background: var(--orange-500);
   transform-origin: left;
   animation: dotfill 13s linear forwards;
@@ -1516,6 +1529,7 @@ input[type="range"]::-moz-range-thumb {
 /* ---------- 21. Misc blocks ---------------------------------------------- */
 .split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 5vw, 62px); align-items: center; }
 .split--wide-left { grid-template-columns: 1.15fr .85fr; }
+.split--wide-right { grid-template-columns: .85fr 1.15fr; }
 
 .quote {
   background: var(--white);
@@ -1611,7 +1625,7 @@ input[type="range"]::-moz-range-thumb {
   .hero__sub { max-width: none; }
   .work-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 196px; }
   .work--feature { grid-column: span 2; grid-row: span 1; }
-  .split, .split--wide-left, .calc { grid-template-columns: 1fr; }
+  .split, .split--wide-left, .split--wide-right, .calc { grid-template-columns: 1fr; }
   .grid-4 { grid-template-columns: repeat(2, 1fr); }
   .stats { grid-template-columns: repeat(2, 1fr); }
   .plans { grid-template-columns: 1fr; }
@@ -1703,4 +1717,146 @@ input[type="range"]::-moz-range-thumb {
   .site-header, .topbar, .cta-band, .site-footer, .nav__toggle { display: none !important; }
   body { font-size: 12pt; }
   .reveal { opacity: 1; transform: none; }
+}
+
+/* ---------------------------------------------------------------------------
+   Mobile legibility
+   Uppercase labels with wide tracking were rendering at 11.8-12.5px on a
+   phone, below the point where they stay comfortably readable. Desktop sizes
+   are unchanged - this only lifts them where the screen is small.
+   --------------------------------------------------------------------------- */
+@media (max-width: 640px) {
+  /* the header CTA sat at 42px - just under the 44px minimum, and it is
+     the most-tapped control on the site */
+  .btn--sm   { padding: 12px 18px; min-height: 44px; }
+  .eyebrow     { font-size: .82rem; letter-spacing: .11em; }
+  .plan__flag  { font-size: .8rem; }
+  .ctrl__label { font-size: .84rem; }
+  .small, .muted.small { font-size: .9rem; }
+}
+
+/* ---------------------------------------------------------------------------
+   Live filter picker
+   Styled as a screen from the contractor app rather than a price table: the
+   point of the section is that these are switches you flip yourself and the
+   cost updates immediately.
+   --------------------------------------------------------------------------- */
+.picker {
+  background: var(--navy-900);
+  border-radius: var(--r-xl);
+  box-shadow: var(--sh-lg);
+  overflow: hidden;
+  color: #fff;
+}
+.picker__bar {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, .06);
+  border-bottom: 1px solid rgba(255, 255, 255, .08);
+}
+.picker__live {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: .76rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
+  color: #6ee7a8;
+}
+.picker__title { font-size: .86rem; color: rgba(255, 255, 255, .62); }
+
+.picker__body { padding: 20px 18px 6px; }
+.picker__label {
+  font-size: .72rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase;
+  color: rgba(255, 255, 255, .48);
+  margin-bottom: 10px;
+}
+.picker__plans { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px; }
+.picker__plan {
+  display: flex; flex-direction: column; gap: 4px; align-items: flex-start;
+  padding: 13px 14px; text-align: left;
+  background: rgba(255, 255, 255, .05);
+  border: 1.5px solid rgba(255, 255, 255, .12);
+  border-radius: var(--r);
+  color: #fff; cursor: pointer;
+  transition: border-color .18s var(--ease), background-color .18s var(--ease);
+}
+.picker__plan:hover { background: rgba(255, 255, 255, .09); }
+.picker__plan.is-on { border-color: var(--orange-500); background: rgba(240, 122, 44, .14); }
+.picker__plan-name  { font-size: .82rem; font-weight: 700; line-height: 1.25; }
+.picker__plan-price { font-size: 1.15rem; font-weight: 800; font-family: var(--font-display); }
+
+.picker__opts { list-style: none; margin: 0; padding: 0; }
+.picker__opts li + li { margin-top: 8px; }
+.picker__opt {
+  width: 100%;
+  display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 13px;
+  padding: 13px 14px; text-align: left;
+  background: rgba(255, 255, 255, .05);
+  border: 1.5px solid rgba(255, 255, 255, .1);
+  border-radius: var(--r);
+  color: #fff; cursor: pointer;
+  transition: border-color .18s var(--ease), background-color .18s var(--ease);
+}
+.picker__opt:hover { background: rgba(255, 255, 255, .09); }
+.picker__opt[aria-pressed="true"] { border-color: var(--orange-500); background: rgba(240, 122, 44, .12); }
+
+.picker__sw {
+  width: 38px; height: 22px; flex: none;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .18);
+  position: relative;
+  transition: background-color .2s var(--ease);
+}
+.picker__sw::after {
+  content: ""; position: absolute; top: 3px; left: 3px;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: #fff;
+  transition: transform .2s var(--ease);
+}
+.picker__opt[aria-pressed="true"] .picker__sw { background: var(--orange-500); }
+.picker__opt[aria-pressed="true"] .picker__sw::after { transform: translateX(16px); }
+
+.picker__opt-text { display: block; min-width: 0; }
+.picker__opt-text strong { display: block; font-size: .9rem; font-weight: 700; }
+.picker__opt-text em {
+  display: block; font-style: normal;
+  font-size: .78rem; color: rgba(255, 255, 255, .55); margin-top: 2px;
+}
+.picker__opt-price { font-size: .88rem; font-weight: 700; color: var(--orange-400); }
+
+.picker__foot {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  margin-top: 18px; padding: 16px 18px;
+  background: rgba(255, 255, 255, .06);
+  border-top: 1px solid rgba(255, 255, 255, .08);
+}
+.picker__total-label {
+  font-size: .72rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
+  color: rgba(255, 255, 255, .52);
+}
+.picker__note { font-size: .8rem; color: #6ee7a8; margin-top: 3px; }
+.picker__total {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 5vw, 2.3rem); font-weight: 800; line-height: 1;
+}
+.picker__total.is-bump { animation: pickerBump .32s var(--ease); }
+@keyframes pickerBump {
+  0%   { transform: scale(1);    color: #fff; }
+  40%  { transform: scale(1.09); color: var(--orange-400); }
+  100% { transform: scale(1);    color: #fff; }
+}
+
+@media (max-width: 560px) {
+  .picker__plans { grid-template-columns: 1fr; }
+  .picker__opt   { grid-template-columns: auto 1fr; row-gap: 4px; }
+  /* price drops under the label rather than squeezing the description */
+  .picker__opt-price { grid-column: 2; justify-self: start; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .picker__total.is-bump { animation: none; }
+}
+
+/* live badge inside the phone mock — reads as a running screen, not a picture */
+.phone__live {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-left: auto; margin-right: 10px;
+  font-size: .66rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
+  color: #19a463;
 }
