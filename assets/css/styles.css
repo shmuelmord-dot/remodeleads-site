@@ -1896,3 +1896,133 @@ input[type="range"]::-moz-range-thumb {
   font-size: .66rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
   color: #19a463;
 }
+
+/* ---------------------------------------------------------------------------
+   Getting-started flow
+   Four cards in a row read as four unrelated boxes. This draws a rail behind
+   the nodes and animates it in with the section, so the sequence is legible
+   as a sequence. The old markup reused .step here, which is built as a
+   horizontal 54px/1fr row - inside a 4-column grid its text column collapsed
+   and every line broke after one word.
+   --------------------------------------------------------------------------- */
+.flowsec { overflow: hidden; }
+
+.flow {
+  list-style: none;
+  margin: 0; padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 26px;
+  position: relative;
+}
+
+/* the rail sits behind the nodes, centred on them */
+.flow::before,
+.flow::after {
+  content: "";
+  position: absolute;
+  top: 29px; left: 0; right: 0; height: 2px;
+  border-radius: 2px;
+}
+.flow::before { background: var(--line); }
+.flow::after {
+  background: linear-gradient(90deg, var(--navy-700), var(--orange-500));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1.5s cubic-bezier(.22, .61, .36, 1) .15s;
+}
+.flow.is-in::after { transform: scaleX(1); }
+
+.flow__step { position: relative; padding-right: 10px; }
+
+.flow__node {
+  position: relative;
+  z-index: 1;
+  display: grid; place-items: center;
+  width: 58px; height: 58px;
+  border-radius: 19px;
+  background: var(--navy-900);
+  color: #fff;
+  box-shadow: 0 10px 22px -10px rgba(16, 36, 56, .55);
+  margin-bottom: 20px;
+  transform: scale(.7);
+  opacity: 0;
+  transition: transform .55s cubic-bezier(.34, 1.56, .64, 1), opacity .4s ease;
+}
+.flow.is-in .flow__node { transform: scale(1); opacity: 1; }
+.flow__step:nth-child(2) .flow__node { transition-delay: .18s; }
+.flow__step:nth-child(3) .flow__node { transition-delay: .36s; }
+.flow__step:nth-child(4) .flow__node { transition-delay: .54s; }
+
+/* the last node is the payoff — mark it */
+.flow__step--last .flow__node { background: var(--orange-500); }
+
+.flow__num {
+  font-family: var(--font-display);
+  font-weight: 800; font-size: 1.3rem; line-height: 1;
+}
+
+.flow__title {
+  font-size: 1.08rem;
+  margin: 0 0 .4em;
+}
+.flow__copy {
+  font-size: .95rem;
+  line-height: 1.6;
+  color: var(--slate-600);
+  margin: 0;
+  max-width: 30ch;
+}
+
+/* reassurance strip */
+.assure {
+  list-style: none; margin: 46px 0 0; padding: 0;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+.assure li {
+  background: var(--white);
+  padding: 22px 24px;
+  transition: background-color .2s var(--ease);
+}
+.assure li:hover { background: #fbfcfd; }
+.assure strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1rem; color: var(--ink); margin-bottom: 5px;
+}
+.assure span { display: block; font-size: .9rem; line-height: 1.55; color: var(--slate-600); }
+
+@media (max-width: 900px) {
+  .flow { grid-template-columns: repeat(2, 1fr); gap: 34px 26px; }
+  /* a rail across two rows would point at nothing — drop it */
+  .flow::before, .flow::after { display: none; }
+  .assure { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 560px) {
+  /* vertical rail: the sequence still reads top-to-bottom */
+  .flow { grid-template-columns: 1fr; gap: 0; }
+  .flow__step { padding: 0 0 30px 64px; }
+  .flow__step::before {
+    content: "";
+    position: absolute; left: 28px; top: 8px; bottom: -8px;
+    width: 2px; background: var(--line);
+  }
+  .flow__step--last::before { display: none; }
+  .flow__node {
+    position: absolute; left: 0; top: 0;
+    width: 56px; height: 56px; margin-bottom: 0;
+  }
+  .flow__title { margin-top: 10px; }
+  .flow__copy { max-width: none; }
+  .assure { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flow::after { transition: none; transform: scaleX(1); }
+  .flow__node { transition: none; transform: none; opacity: 1; }
+}

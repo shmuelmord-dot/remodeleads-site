@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
 <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
-<link rel="stylesheet" href="assets/css/styles.css?v=15">
+<link rel="stylesheet" href="assets/css/styles.css?v=16">
 </head>
 <body>
 
@@ -1180,7 +1180,7 @@
 </section>
 
 <!-- ========================= GETTING STARTED ======================= -->
-<section class="section">
+<section class="section section--soft flowsec">
   <div class="container">
     <div class="section-head reveal">
       <span class="eyebrow">Getting started</span>
@@ -1189,35 +1189,41 @@
       nothing is charged until an appointment actually reaches your calendar.</p>
     </div>
 
-    <div class="grid grid-4">
-      <div class="step reveal">
-        <div class="step__num">1</div>
-        <h3>Sign up</h3>
-        <p>Create your account in the contractor app and add a card.</p>
-      </div>
-      <div class="step reveal" data-delay="1">
-        <div class="step__num">2</div>
-        <h3>Set your rules</h3>
-        <p>Pick your counties, your daily cap, and the days and hours you'll take meetings.</p>
-      </div>
-      <div class="step reveal" data-delay="2">
-        <div class="step__num">3</div>
-        <h3>Choose your plan</h3>
-        <p>Basic or Confirmation + Insurance, plus any filters you want. Changeable any time.</p>
-      </div>
-      <div class="step reveal" data-delay="3">
-        <div class="step__num">4</div>
-        <h3>Start meeting homeowners</h3>
-        <p>Appointments land in the app with full detail. You show up and sell.</p>
-      </div>
-    </div>
+    <!-- Connected flow. The rail behind the nodes draws itself in when the
+         list scrolls into view, so the eye is pulled left-to-right through
+         the sequence rather than landing on four identical boxes. -->
+    <ol class="flow reveal">
+      <li class="flow__step">
+        <span class="flow__node"><span class="flow__num">1</span></span>
+        <h3 class="flow__title">Sign up</h3>
+        <p class="flow__copy">Create your account in the contractor app and add a card.</p>
+      </li>
+      <li class="flow__step">
+        <span class="flow__node"><span class="flow__num">2</span></span>
+        <h3 class="flow__title">Set your rules</h3>
+        <p class="flow__copy">Pick your counties, your daily cap, and the days and hours
+        you'll take meetings.</p>
+      </li>
+      <li class="flow__step">
+        <span class="flow__node"><span class="flow__num">3</span></span>
+        <h3 class="flow__title">Choose your plan</h3>
+        <p class="flow__copy">Basic or Confirmation + Insurance, plus any filters you want.
+        Changeable any time.</p>
+      </li>
+      <li class="flow__step flow__step--last">
+        <span class="flow__node"><span class="flow__num">4</span></span>
+        <h3 class="flow__title">Start meeting homeowners</h3>
+        <p class="flow__copy">Appointments land in the app with full detail. You show up
+        and sell.</p>
+      </li>
+    </ol>
 
-    <div class="grid grid-4 mt-4">
-      <div class="card card--hover reveal"><h4>No commitment</h4><p class="small">No minimum period and no minimum number of appointments.</p></div>
-      <div class="card card--hover reveal" data-delay="1"><h4>Full control</h4><p class="small">Counties, daily cap, schedule and payment — all in your hands.</p></div>
-      <div class="card card--hover reveal" data-delay="2"><h4>Start, stop or pause</h4><p class="small">Change your settings whenever you want, from the app.</p></div>
-      <div class="card card--hover reveal" data-delay="3"><h4>No extra fees</h4><p class="small">No monthly fee, no setup cost. You only pay for appointments.</p></div>
-    </div>
+    <ul class="assure reveal">
+      <li><strong>No commitment</strong><span>No minimum period, no minimum number of appointments.</span></li>
+      <li><strong>Full control</strong><span>Counties, daily cap, schedule and payment, all yours.</span></li>
+      <li><strong>Start, stop or pause</strong><span>Change your settings whenever you want.</span></li>
+      <li><strong>No extra fees</strong><span>No monthly fee, no setup cost. Appointments only.</span></li>
+    </ul>
 
     <div class="text-center mt-4 reveal">
       <a class="btn btn--primary btn--lg" href="https://app.remodeleads.com/join">Sign up and set your rules →</a>
@@ -1284,6 +1290,6 @@
   </div>
 </footer>
 
-<script src="assets/js/site.js?v=15"></script>
+<script src="assets/js/site.js?v=16"></script>
 </body>
 </html>
