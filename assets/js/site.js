@@ -51,11 +51,11 @@
     // Territory availability shown by the hero widget + coverage grid.
     // 'open' | 'limited' | 'waitlist'
     counties: {
-      'Los Angeles':    'open',
-      'Orange County':  'limited',
-      'Ventura':        'open',
+      'Los Angeles':    'limited',
+      'Orange County':  'open',
+      'Ventura':        'limited',
       'San Bernardino': 'open',
-      'Riverside':      'limited',
+      'Riverside':      'open',
       'Kern':           'open'
     }
   };
@@ -741,6 +741,47 @@
           from the markup, so the picker can't drift from the pricing section
           sitting directly above it.
      ---------------------------------------------------------------------- */
+  /* ----------------------------------------------------------------------
+     9c. Booking embed safety net
+         GoHighLevel's form_embed.js parks the iframe at left:-9999px with
+         visibility:hidden while it waits for the widget to postMessage its
+         height back, then reveals it. When that handshake doesn't complete -
+         blocked third-party frames, a slow network, an origin the account
+         doesn't recognise - the iframe stays hidden and the slot collapses to
+         a couple of pixels, so the contact page shows a blank gap where the
+         calendar should be.
+
+         This waits, and if the calendar still isn't visible it puts it back
+         in flow at a usable height. An un-auto-sized calendar is a far better
+         outcome than no calendar.
+     ---------------------------------------------------------------------- */
+  function initSchedulerFallback() {
+    var slot = $('#scheduler-embed');
+    if (!slot) return;
+
+    var FALLBACK_HEIGHT = 780;   // enough for the month view plus time slots
+
+    function hidden(fr) {
+      var cs = getComputedStyle(fr);
+      return cs.visibility === 'hidden' || cs.opacity === '0' ||
+             parseInt(cs.left, 10) < -1000 ||
+             fr.getBoundingClientRect().height < 80;
+    }
+
+    function rescue() {
+      var fr = slot.querySelector('iframe');
+      if (!fr || !hidden(fr)) return;
+      fr.style.cssText = 'width:100%;border:0;display:block;position:static;' +
+                         'left:auto;opacity:1;visibility:visible;pointer-events:auto;' +
+                         'height:' + FALLBACK_HEIGHT + 'px;min-height:' + FALLBACK_HEIGHT + 'px';
+      fr.setAttribute('scrolling', 'yes');   // it can no longer be auto-resized
+      slot.classList.add('is-rescued');
+    }
+
+    setTimeout(rescue, 4000);
+    setTimeout(rescue, 9000);   // second pass for slow connections
+  }
+
   function initPicker() {
     var picker = $('#picker');
     if (!picker) return;
@@ -965,6 +1006,7 @@
     initApplyForm();
     initStory();
     initScheduler();
+    initSchedulerFallback();
     initYear();
   }
 

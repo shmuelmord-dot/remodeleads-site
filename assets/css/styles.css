@@ -1597,7 +1597,11 @@ input[type="range"]::-moz-range-thumb {
 }
 .embed-slot__inner { max-width: 420px; }
 .embed-slot iframe { width: 100%; min-height: 620px; border: 0; border-radius: var(--r-lg); }
-.embed-slot.is-live { border: 1px solid var(--line); background: var(--white); padding: 0; min-height: 0; display: block; }
+.embed-slot.is-live { border: 1px solid var(--line); background: var(--white); padding: 0; display: block;
+  /* never collapse: GHL hides the iframe while it loads, and a 2px-tall
+     slot reads as a broken page. Holds the space until it reveals. */
+  min-height: 620px; }
+.embed-slot.is-rescued iframe { height: 780px !important; }
 
 /* ---------- 22. Scroll reveal -------------------------------------------- */
 .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
